@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="language" content="Arabic">
+  <meta name="lang" content="ar">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Dragon Connect</title>
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;600;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.9/dist/fancybox.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.9/dist/fancybox.umd.js"></script>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="icon" href="https://up6.cc/2025/04/174463800083471.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://up6.cc/2025/04/174463800083471.png">
+  <meta name="robots" content="index, follow">
+  <meta property="og:image" content="https://up6.cc/2025/04/174463800083471.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
+  <meta property="og:title" content="Dragon Connect">
+  <meta property="og:description" content="">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dragon Connect">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="https://up6.cc/2025/04/174463800083471.png">
+  <meta name="twitter:creator" content="@YourTwitterHandle">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Dragon Connect">
+  <meta name="theme-color" content="#081c2f">
+  <meta name="author" content="Hatem Zahran">
+  <meta name="developer" content="Hatem Zahran">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dragon Connect">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="https://up6.cc/2025/04/174463800083471.png">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="Dragon Connect">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="google-apps-indexing" content="auto">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#081c2f">
+  <link rel="manifest" href="/manifest.json">
+  <script type="application/ld+json">
+       {
+         "@context": "http://schema.org",
+         "@type": "Website",
+         "name": "Dragon Connect",
+         "url": "",
+         "logo": "https://up6.cc/2025/04/174463800083471.png",
+         "description": "",
+         "publisher": {
+           "@type": "Organization",
+           "name": "Hatem Zahran",
+           "logo": "https://up6.cc/2025/04/174463800083471.png"
+         }
+       }
+   </script>
+  <style>
+    body {
+      user-select: none;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
+
+    :root {
+      --main-bg: #191c25;
+      --accent: #fff;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      background: var(--main-bg);
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .app-header {
+      text-align: center;
+      padding: 0rem 0;
+      position: relative;
+    }
+
+    .app-logo {
+      width: 150px;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s;
+      border-radius: 20px;
+      border: 1px solid #fff;
+    }
+
+    h1 {
+      font-size: 2rem;
+      background: #fff;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+    }
+
+    .features-section {
+      margin: 2rem 0;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .features-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+      position: relative;
+      outline: none;
+    }
+
+    .arrow-icon {
+      font-size: 1.2rem;
+      color: var(--accent);
+      transition: transform 0.3s;
+      position: absolute;
+      left: 15px;
+    }
+
+    .features-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .features-container.active {
+      max-height: 1500px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      padding: 1.5rem;
+      margin: 1rem;
+      background: rgba(0, 243, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 243, 255, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: itemAppear 0.5s ease forwards;
+    }
+
+    @keyframes itemAppear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-left: 1rem;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 3rem 0;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 50%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      outline: none;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 400px;
+      transition: transform 0.3s ease;
+    }
+
+    .swiper-slide:hover img {
+      transform: scale(1.1);
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      position: relative;
+      text-decoration: none;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+      padding: 12px 25px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      gap: 10px;
+      font-weight: bold;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      outline: none;
+      overflow: hidden;
+      font-size: 16px;
+      min-width: 200px;
+    }
+
+    .btn-google {
+      background: linear-gradient(45deg, #4CAF50, #45a049);
+    }
+
+    .btn-direct {
+      background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+    }
+
+    .btn-mediafire {
+      background: linear-gradient(45deg, #4285F4, #2b6cd4);
+    }
+
+    .btn-downloader {
+      background: linear-gradient(45deg, #FF9800, #f57c00);
+    }
+
+    .download-btn:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .download-btn i {
+      transition: all 0.3s ease-in-out;
+      font-size: 1.2em;
+    }
+
+    .download-btn:hover i {
+    }
+
+    .download-btn::before {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      background-image: linear-gradient(120deg,
+          rgba(255, 255, 255, 0) 30%,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0) 70%);
+      top: 0;
+      left: -100px;
+      opacity: 0.6;
+    }
+
+    .download-btn:hover::before {
+      animation: shine 1.5s ease-out infinite;
+    }
+
+    .loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--main-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 1s ease;
+    }
+
+    .loader-container.hidden {
+      opacity: 0;
+    }
+
+    .loader {
+      display: block;
+      --height-of-loader: 4px;
+      --loader-color: #fff;
+      width: 130px;
+      height: var(--height-of-loader);
+      border-radius: 30px;
+      background-color: rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+
+    .loader::before {
+      content: "";
+      position: absolute;
+      background: var(--loader-color);
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      border-radius: 30px;
+      animation: moving 1.5s ease-in-out infinite;
+    }
+
+    @keyframes moving {
+      50% {
+        width: 100%;
+      }
+
+      100% {
+        width: 0;
+        right: 0;
+        left: unset;
+      }
+    }
+
+    body:not(.loaded) .container {
+      opacity: 0;
+    }
+
+    body.loaded .container {
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    body:not(.loaded) {
+      overflow: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #00f3ff, #8620af);
+      border-radius: 10px;
+      border: 2px solid #081c2f;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, #8620af, #00f3ff);
+    }
+
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #00f3ff #081c2f;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .social-link.telegram:hover {
+      background: #0088cc;
+    }
+
+    .social-link.whatsapp:hover {
+      background: #25D366;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100px;
+      }
+
+      60% {
+        left: 100%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .focusable:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 5px;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent) !important;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 3px var(--main-bg), 0 0 0 6px var(--accent);
+    }
+
+    button:active,
+    .features-toggle:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 4rem;
+      border-top: 1px solid #fff;
+      font-size: 15px;
+    }
+
+
+    .code-box-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .code-box-label {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .code-box {
+      position: relative;
+      background: rgba(255, 140, 0, 1);
+      border: 2px solid #FFC876;
+      border-radius: 8px;
+      padding: 1rem 2rem;
+      font-family: monospace;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+    }
+
+    .code-box:hover {
+      background: rgba(0, 243, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .code-box:active {
+      transform: translateY(0);
+    }
+
+    .code-box::after {
+      content: "نسخ";
+      position: absolute;
+      left: -40px;
+      background: var(--accent);
+      color: var(--main-bg);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .code-box:hover::after {
+      opacity: 1;
+    }
+
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(0, 243, 255, 0.9);
+      color: var(--main-bg);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: `1rem;
+      }
+
+      .swiper-slide img {
+        height: 250px;
+      }
+
+      .download-btn {
+        min-width: 300px;
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      .features-toggle {
+        padding: 1rem;
+      }
+
+      .focusable {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+
+      .focusable:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+
+      .code-box {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .code-box::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <a href="#" target="_blank">
+        <img src="https://up6.cc/2025/04/174463800083471.png" class="app-logo focusable" tabindex="0">
+      </a>
+      <h1 tabindex="0" class="focusable">Dragon Connect</h1>
+    </header>
+
+    <section class="features-section">
+      <div class="features-toggle focusable" onclick="toggleFeatures()" role="button" tabindex="0"
+        aria-expanded="false">
+        <h2>مميزات التطبيق</h2>
+        <i class="fas fa-chevron-down arrow-icon"></i>
+      </div>
+      <div class="features-container" id="featuresContainer">
+        <div class="feature-item focusable" style="animation-delay: 0.1s" tabindex="0">
+          <i class="fas fa-tv feature-icon"></i>
+
+          <div>
+            <h3>جودة 4K فائقة</h3>
+            <p>تجربة بث مباشر بدقة عالية مع تقنية HDR</p>
+          </div>
+        </div>
+        <div class="feature-item focusable" style="animation-delay: 0.2s" tabindex="0">
+          <i class="fas fa-rocket feature-icon"></i>
+          <div>
+            <h3>سرعة فائقة</h3>
+            <p>تشغيل فوري بدون تأخير أو تقطيع</p>
+          </div>
+        </div>
+        <div class="feature-item focusable" style="animation-delay: 0.3s" tabindex="0">
+          <i class="fas fa-mobile-alt feature-icon"></i>
+          <div>
+            <h3>متعدد الأجهزة</h3>
+            <p>دعم كامل للهواتف والأجهزة اللوحية</p>
+          </div>
+        </div>
+        <div class="feature-item focusable" style="animation-delay: 0.4s" tabindex="0">
+          <i class="fas fa-sliders-h feature-icon"></i>
+          <div>
+            <h3>إعدادات ذكية</h3>
+            <p>تحكم كامل في جودة البث حسب اتصالك</p>
+          </div>
+        </div>
+        <div class="feature-item focusable" style="animation-delay: 0.5s" tabindex="0">
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <div>
+            <h3>حماية وأمان</h3>
+            <p>تشفير متقدم لحماية بياناتك</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+
+    <div class="code-box-container">
+      <div class="code-box-label">كود Downloader التطبيق للشاشات</div>
+      <div class="code-box focusable" onclick="copyCode()" tabindex="0">
+        6859055
+      </div>
+    </div>
+    
+    <div class="code-box-container">
+      <div class="code-box-label">كود Downloader المشغل للشاشات</div>
+      <div class="code-box focusable" onclick="copyCode()" tabindex="0">
+        1568934
+      </div>
+    </div>
+
+
+    
+    <div class="download-buttons">
+      <a href="https://www.mediafire.com/file/ugo8p2kqo281e35/Dragon_Connect.apk/file" target="_blank" class="download-btn btn-mediafire focusable"
+        tabindex="0" role="button" aria-label="تحميل التطبيق">
+        <i class="fas fa-cloud-download-alt"></i>
+تحميل التطبيق
+      </a>
+      <a href="https://www.mediafire.com/file/iz5m0k52qjkl6fe/Dragon_Player.apk/file" target="_blank" class="download-btn btn-mediafire focusable"
+        tabindex="0" role="button" aria-label="تحميل المشغل">
+        <i class="fas fa-cloud-download-alt"></i>
+تحميل المشغل
+      </a>
+      
+
+    </div>
+
+    <div class="toast" id="toast">تم نسخ الكود</div>
+	
+    <footer tabindex="0" class="focusable">
+      <p>© 2025 Dragon Connect جميع الحقوق محفوظة</p>
+      <div class="social-links">
+        <a href="https://t.me/dragonconnectapp" target="_blank" class="social-link telegram focusable" tabindex="0"
+          aria-label="رابط التليجرام">
+          <i class="fab fa-telegram"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61575062234190" target="_blank" class="social-link telegram focusable" tabindex="0"
+          aria-label="رابط الفيسبوك">
+          <i class="fab fa-facebook"></i>
+        </a>
+        
+      </div>
+    </footer>
+  </div>
+
+  <div class="loader-container">
+    <div class="loader"></div>
+  </div>
+
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: {
+        rotate: 5,
+        stretch: 0,
+        depth: 100,
+        modifier: 2,
+        slideShadows: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      loop: true,
+      autoplay: {
+        delay: 3000,
+      },
+      keyboard: {
+        enabled: false,
+        onlyInViewport: true,
+      },
+    });
+
+    function toggleFeatures() {
+      const container = document.getElementById('featuresContainer');
+      const arrow = document.querySelector('.arrow-icon');
+      const isExpanded = container.classList.toggle('active');
+      arrow.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0)';
+      document.querySelector('.features-toggle').setAttribute('aria-expanded', isExpanded);
+    }
+
+    function findNextElement(direction, currentElement) {
+      if (window.innerWidth < 768) return null;
+
+      const focusableElements = Array.from(document.querySelectorAll(
+        '.features-section .focusable, ' +
+        '.mySwiper .focusable, ' +
+        '.download-buttons .focusable'
+      ));
+      const currentRect = currentElement.getBoundingClientRect();
+      let candidate = null;
+      let candidateDistance = Infinity;
+
+      focusableElements.forEach(el => {
+        if (el === currentElement) return;
+        const rect = el.getBoundingClientRect();
+        let valid = false;
+        let distance = 0;
+
+        switch (direction) {
+          case 'left':
+            if (rect.right <= currentRect.left) {
+              valid = true;
+              distance = currentRect.left - rect.right;
+            }
+            break;
+          case 'right':
+            if (rect.left >= currentRect.right) {
+              valid = true;
+              distance = rect.left - currentRect.right;
+            }
+            break;
+          case 'up':
+            if (rect.bottom <= currentRect.top) {
+              valid = true;
+              distance = currentRect.top - rect.bottom;
+            }
+            break;
+          case 'down':
+            if (rect.top >= currentRect.bottom) {
+              valid = true;
+              distance = rect.top - currentRect.bottom;
+            }
+            break;
+        }
+
+        if (valid && distance < candidateDistance) {
+          candidateDistance = distance;
+          candidate = el;
+        }
+      });
+
+      return candidate;
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (window.innerWidth < 768) return;
+
+      const active = document.activeElement;
+      let nextElement = null;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+          nextElement = findNextElement('left', active);
+          break;
+        case 'ArrowRight':
+          nextElement = findNextElement('right', active);
+          break;
+        case 'ArrowUp':
+          nextElement = findNextElement('up', active);
+          break;
+        case 'ArrowDown':
+          nextElement = findNextElement('down', active);
+          break;
+        case 'Enter':
+          active.click();
+          break;
+      }
+
+      if (nextElement) {
+        nextElement.focus();
+        e.preventDefault();
+      }
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      infinite: true,
+      toolbar: false,
+      buttons: [
+        "zoom",
+        "close",
+        "fullscreen",
+        "slideshow",
+        "download"
+      ],
+      toolbar: {
+        display: ["zoom", "fullscreen", "slideshow", "download", "close"]
+      }
+    });
+
+
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+  
+  <script>
+    document.querySelectorAll('img').forEach(img => {
+      img.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+    });
+
+
+    document.addEventListener('mousedown', (e) => {
+      if (e.target.nodeName !== 'INPUT' && e.target.nodeName !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    });
+  </script>
+  
+  <script>
+    window.addEventListener('load', function () {
+      setTimeout(() => {
+        const loaderContainer = document.querySelector('.loader-container');
+        loaderContainer.classList.add('hidden');
+        document.body.classList.add('loaded');
+        setTimeout(() => {
+          loaderContainer.style.display = 'none';
+        }, 1000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
