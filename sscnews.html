@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Storm Connect</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.1/shaka-player.compiled.js"></script>
+   <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+   <link rel="stylesheet" href="https://www.high-kora.com/TOD/WEB/new.css">
+
+
+<style type="text/css">
+body {
+margin: 0;
+padding: 0;
+}
+
+.jwplayer .jw-media video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important; /*
+}
+
+
+</style>
+
+   <script>
+       document.addEventListener("DOMContentLoaded", function () {
+    jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+
+    let channelData = {"title":"","stream_url":"https://ssc-news-live-enc.edgenextcdn.net/out/v1/ef466f43623c4bbaa3f905b566ec35ea/index.mpd","drm_keys":{"3d04975236a44f62857d181597705ee6":"362133e9cb13189ad4fe095ced216f60"}};
+
+    // التحقق من وجود stream_url و drm_keys
+    if (channelData && channelData.stream_url && channelData.drm_keys) {
+        setupJWPlayer(channelData);
+    } else {
+        console.error("فشل في تحميل بيانات القناة أو البيانات غير صحيحة!");
+        alert("فشل في تحميل بيانات القناة أو البيانات غير صحيحة!");
+    }
+
+         let isExpanded = false;
+
+        
+         
+         function setupJWPlayer(data) {
+            var playerInstance = jwplayer("player");
+            playerInstance.setup({
+               width: "100%",
+               height: "100%",
+               controls: true,
+               stretching: "uniform",
+               autostart: true,
+               mute: false,
+               volume: 100,
+               horizontalVolumeSlider:true,
+               playbackRateControls: true, 
+               playbackRates: [0.5, 1, 1.25, 1.5, 2],
+               aspectratio: "16:9",
+               playlist: [{
+                  sources: [{
+                     file: data.stream_url,
+                     type: "dash",
+                     drm: {
+                        clearkey: {
+                           keyId: Object.keys(data.drm_keys)[0],
+                           key: Object.values(data.drm_keys)[0]
+                        }
+                     },
+                     label: "HD"
+                  }]
+               }]
+            });
+
+            playerInstance.on("setupError", function (event) {
+               console.error("خطأ في إعداد المشغل:", event.message);
+               alert("حدث خطأ أثناء تحميل المشغل!");
+            });
+
+           playerInstance.on("ready", function () {
+   playerInstance.addButton(
+      expandSvg, 
+      "توسيع الفيديو", 
+      function () { toggleExpand(); }, 
+      "jw-expandButton"
+   );
+});
+
+            function toggleExpand() {
+               const videoElement = document.querySelector("#player video");
+               if (!videoElement) return;
+               videoElement.style.objectFit = isExpanded ? 'fill' : 'contain';
+               isExpanded = !isExpanded;
+               updateExpandButtonTooltip();
+            }
+
+            function updateExpandButtonTooltip() {
+               const button = document.querySelector('.jw-expandButton');
+               if (button) {
+                  button.setAttribute('aria-label', isExpanded ? 'تصغير الفيديو' : 'تمدد الفيديو');
+               }
+            }
+
+            playerInstance.on("ready", function () {
+               console.log("تم تحميل المشغل بنجاح!");
+            });
+         }
+
+         setupJWPlayer();
+      });
+   </script>
+
+   <style>
+      * { margin: 0; padding: 0; outline: none; }
+      body, html { width: 100%; height: 100%; overflow: hidden; background-color: black; }
+      #player { width: 100%!important; height: 100%!important; }
+   </style>
+</head>
+<body>
+   <div id="player"></div>
+</body>
+</html>
